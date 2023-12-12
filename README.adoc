@@ -1,0 +1,4 @@
+= rocky9-terraform
+
+== To-Do
+	variable for epel-release as of now the gpgkey is static. 
