@@ -2,3 +2,15 @@
 
 == To-Do
 	variable for epel-release as of now the gpgkey is static. 
+
+== Basic Setup
+This basic setup create x number of virt machine. It uses a basic image which will be resized based on the calculation you can find in the variable file. Open terraform console and see how big you want the disk. Now it's set to 65GB. 
+
+== Root User
+You can set the root password using the terraform.tfvars variable using the *mkpasswd --method=SHA-512 --rounds=4096* command on rocky or other linux machines.  
+
+== PKG 
+I installed a few default pkg, like htop, git and epel-release to do some testing. Feel free to add more. 
+
+
+
