@@ -14,4 +14,4 @@ I installed a few default pkg, like htop, git and epel-release to do some testin
 
 
 == K3D
-The k3d branch has the cluster installed. Very basic but ready to use.
+The k3s branch has the cluster installed. Very basic but ready to use.
