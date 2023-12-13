@@ -1,3 +1,4 @@
+variable docker_login_token {}
 variable rootpass {}
 variable username {
   type = string
@@ -20,8 +21,7 @@ variable phone_home_url {
 
 variable disksize {
   type = number
-  default = "70866960384" 
+  default = "70866960384"
 }
-  # cal from terraform console = "66 * 1024 * 1024 * 1024" 
+  # cal from terraform console = "66 * 1024 * 1024 * 1024"
   # 66GiB. the root FS is automatically resized by cloud-init growpart (see https://cloudinit.readthedocs.io/en/latest/topics/examples.html#grow-partitions).
-

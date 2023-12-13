@@ -52,6 +52,12 @@ yum_repos:
     gpgcheck: false
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9-Testing
     name: Extra Packages for Enterprise Linux 9 - Testing
+  kubernetes:
+    name: Kubernetes
+    baseurl: https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
 packages:
   - ca-certificates
   - curl
@@ -83,7 +89,17 @@ chpasswd:
   expire: False
 runcmd:
   - ip a s ens3|grep inet| awk '{print $2}' |tee /etc/issue
-  - dnf install -y httpd-tools cloud-utils-growpart gdisk libicu git wget net-tools httpd-tools htop epel-release htop
+  - dnf install -y httpd-tools cloud-utils-growpart gdisk libicu git wget net-tools httpd-tools htop epel-release htop kubectl
+  - dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  - dnf install -y docker-ce docker-ce-cli containerd.io
+  - systemctl enable --now docker
+  - usermod -aG docker remo
+  - echo ${var.docker_login_token} >/tmp/docker_token
+  - cat /tmp/docker_token |docker login --username itlinux --password-stdin
+  - wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+  - modprobe ip_tables
+  - echo 'ip_tables'| tee -a /etc/modules
+  - k3d cluster create myk3scluster
 EOF
 }
 
